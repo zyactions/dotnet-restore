@@ -1,0 +1,73 @@
+name: 'ZyAction: .NET Restore'
+
+author: Florian Bernd
+description: A GitHub Action that wraps the .NET CLI `dotnet restore` command.
+
+branding:
+  icon: terminal
+  color: blue
+
+inputs:
+  workspace:
+    description: The Visual Studio workspace (directory, project- or solution-file).
+    type: string
+    required: false
+    default: ''
+  configfile:
+    description: >
+      The NuGet configuration file (nuget.config) to use. 
+      If specified, only the settings from this file will be used. 
+      If not specified, the hierarchy of configuration files from the current directory will be used. 
+    type: string
+    required: false
+    default: ''
+  ignore-failed-sources:
+    description: Only warn about failed sources if there are packages meeting the version requirement.
+    type: boolean
+    required: false
+    default: false
+  force:
+    description: >
+      Forces all dependencies to be resolved even if the last restore was successful. 
+      Specifying this flag is the same as deleting the 'project.assets.json' file.
+    type: boolean
+    required: false
+    default: false
+  force-evaluate:
+    description: Forces restore to reevaluate all dependencies even if a lock file already exists.
+    type: boolean
+    required: false
+    default: false
+  use-lock-file:
+    description: Enables project lock file to be generated and used with restore.
+    type: boolean
+    required: false
+    default: false
+  lock-file-path:
+    description: >
+      Output location where project lock file is written. 
+      By default, this is 'PROJECT_ROOT\packages.lock.json'.
+    type: string
+    required: false
+    default: ''
+  locked-mode:
+    description: Don't allow updating project lock file.
+    type: boolean
+    required: false
+    default: false
+
+runs:
+  using: composite
+  steps:
+    - name: .NET Restore
+      shell: bash
+      run: >
+        dotnet restore
+        ${{ inputs.configfile != '' && format('--configfile "{0}"', inputs.configfile) || '' }}
+        ${{ inputs.ignore-failed-sources != 'false' && '--ignore-failed-sources' || '' }}
+        ${{ inputs.force != 'false' && '--force' || '' }}
+        ${{ inputs.force-evaluate != 'false' && '--force-evaluate' || '' }}
+        ${{ inputs.use-lock-file != 'false' && '--use-lock-file' || '' }}
+        ${{ inputs.lock-file-path != '' && format('--lock-file-path "{0}"', inputs.lock-file-path) || '' }}
+        ${{ inputs.locked-mode != 'false' && '--locked-mode' || '' }}
+        "${{ inputs.workspace }}"
