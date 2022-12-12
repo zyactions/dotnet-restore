@@ -6,7 +6,7 @@
 [![macOS][shield-platform-macos]][job-runs-on]
 [![Windows][shield-platform-windows]][job-runs-on]
 
-A GitHub Action to set up a specific version of the .NET SDK in a workflow run.
+A GitHub Action that wraps the .NET CLI `dotnet restore` command. 
 
 ## Features
 
@@ -111,7 +111,6 @@ Versions follow the [semantic versioning scheme][semver].
 [dotnet-restore]: https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore
 [dotnet-sdk]: https://github.com/dotnet/sdk
 [job-runs-on]: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-[matching-a-cache-key]: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
 [nuget-configurations]: https://learn.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior
 [semver]:https://semver.org
 [shield-license-mit]: https://img.shields.io/badge/License-MIT-blue.svg
