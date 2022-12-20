@@ -21,10 +21,10 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3
 
       - name: .NET Setup
-        uses: zyactions/dotnet-setup@v1.0.0
+        uses: zyactions/dotnet-setup@v1
 
       - name: .NET Restore
         uses: ./

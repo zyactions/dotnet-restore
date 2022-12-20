@@ -27,7 +27,7 @@ A GitHub Action that wraps the .NET CLI `dotnet restore` command.
 steps:
   - ...
   - name: .NET Restore
-    uses: zyactions/dotnet-restore@master
+    uses: zyactions/dotnet-restore@v1
 ```
 
 The `dotnet restore` command automatically searches for a Visual Studio Solution file (`*.sln`) in the repository root.
@@ -38,7 +38,7 @@ The `dotnet restore` command automatically searches for a Visual Studio Solution
 steps:
   - ...
   - name: .NET Restore
-    uses: zyactions/dotnet-restore@master
+    uses: zyactions/dotnet-restore@v1
     with:
       workspace: tests/Tests.sln
 ```
