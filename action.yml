@@ -63,6 +63,7 @@ runs:
       shell: bash
       run: >
         dotnet restore
+        "${{ inputs.workspace }}"
         ${{ inputs.configfile != '' && format('--configfile "{0}"', inputs.configfile) || '' }}
         ${{ inputs.ignore-failed-sources != 'false' && '--ignore-failed-sources' || '' }}
         ${{ inputs.force != 'false' && '--force' || '' }}
@@ -70,4 +71,3 @@ runs:
         ${{ inputs.use-lock-file != 'false' && '--use-lock-file' || '' }}
         ${{ inputs.lock-file-path != '' && format('--lock-file-path "{0}"', inputs.lock-file-path) || '' }}
         ${{ inputs.locked-mode != 'false' && '--locked-mode' || '' }}
-        "${{ inputs.workspace }}"
