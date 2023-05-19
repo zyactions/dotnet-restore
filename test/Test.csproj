@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net7</TargetFramework>
 
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <RestoreLockedMode Condition="'$(ContinuousIntegrationBuild)' == 'true'" />
 
     <OutputType>Exe</OutputType>

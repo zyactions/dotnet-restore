@@ -11,6 +11,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  TEST_DIRECTORY: test
+
 jobs:
   test:
     name: Test
@@ -29,9 +32,10 @@ jobs:
       - name: .NET Restore
         uses: ./
         with:
-          workspace: test
+          working-directory: ${{ env.TEST_DIRECTORY }}
 
       - name: .NET Restore Project
         uses: ./
         with:
-          workspace: test/Test.csproj
+          working-directory: ${{ env.TEST_DIRECTORY }}
+          workspace: Test.csproj
