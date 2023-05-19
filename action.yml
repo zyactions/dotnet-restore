@@ -8,16 +8,30 @@ branding:
   color: blue
 
 inputs:
+  working-directory:
+    description: >
+      The working-directory for the action.
+
+      Defaults to the repository root directory (`github.workspace`).
+
+      If a specific .NET SDK version is to be used, the working directory must point to the
+      directory that contains the `global.json` or a subdirectory of it.
+    type: string
+    required: false
+    default: ${{ github.workspace }}
   workspace:
-    description: The Visual Studio workspace (directory, project- or solution-file).
+    description: >
+      The Visual Studio workspace (directory, project- or solution-file).
+
+      This path is relative to the `working-directory` unless an absolute path is used.
     type: string
     required: false
     default: ''
   configfile:
     description: >
-      The NuGet configuration file (nuget.config) to use. 
-      If specified, only the settings from this file will be used. 
-      If not specified, the hierarchy of configuration files from the current directory will be used. 
+      The NuGet configuration file (nuget.config) to use.
+      If specified, only the settings from this file will be used.
+      If not specified, the hierarchy of configuration files from the current directory will be used.
     type: string
     required: false
     default: ''
@@ -28,7 +42,7 @@ inputs:
     default: false
   force:
     description: >
-      Forces all dependencies to be resolved even if the last restore was successful. 
+      Forces all dependencies to be resolved even if the last restore was successful.
       Specifying this flag is the same as deleting the 'project.assets.json' file.
     type: boolean
     required: false
@@ -45,7 +59,7 @@ inputs:
     default: false
   lock-file-path:
     description: >
-      Output location where project lock file is written. 
+      Output location where project lock file is written.
       By default, this is 'PROJECT_ROOT\packages.lock.json'.
     type: string
     required: false
@@ -60,6 +74,7 @@ runs:
   using: composite
   steps:
     - name: .NET Restore
+      working-directory: ${{ inputs.working-directory }}
       shell: bash
       run: >
         dotnet restore

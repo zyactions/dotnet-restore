@@ -40,14 +40,27 @@ steps:
   - name: .NET Restore
     uses: zyactions/dotnet-restore@v1
     with:
-      workspace: tests/Tests.sln
+      working-directory: test
+      workspace: Tests.sln
 ```
 
 ## Inputs
 
+### `working-directory`
+
+The working-directory for the action.
+
+Defaults to the repository root directory (`github.workspace`).
+
+> **Note**
+>
+> If a specific .NET SDK version is to be used, the working directory must point to the directory that contains the `global.json` or a subdirectory of it.
+
 ### `workspace`
 
 The Visual Studio workspace (directory, project- or solution-file).
+
+This path is relative to the `working-directory` unless an absolute path is used.
 
 The `dotnet restore` command automatically searches for a Visual Studio Solution file (`*.sln`) in the specified workspace directory, if no explicit solution- or project- file is specified.
 
