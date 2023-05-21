@@ -1,4 +1,4 @@
-# .NET Setup
+# .NET Restore
 
 ![License: MIT][shield-license-mit]
 [![CI][shield-ci]][workflow-ci]
