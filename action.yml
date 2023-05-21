@@ -76,13 +76,14 @@ runs:
     - name: .NET Restore
       working-directory: ${{ inputs.working-directory }}
       shell: bash
-      run: >
-        dotnet restore
-        "${{ inputs.workspace }}"
-        ${{ inputs.configfile != '' && format('--configfile "{0}"', inputs.configfile) || '' }}
-        ${{ inputs.ignore-failed-sources != 'false' && '--ignore-failed-sources' || '' }}
-        ${{ inputs.force != 'false' && '--force' || '' }}
-        ${{ inputs.force-evaluate != 'false' && '--force-evaluate' || '' }}
-        ${{ inputs.use-lock-file != 'false' && '--use-lock-file' || '' }}
-        ${{ inputs.lock-file-path != '' && format('--lock-file-path "{0}"', inputs.lock-file-path) || '' }}
-        ${{ inputs.locked-mode != 'false' && '--locked-mode' || '' }}
+      env:
+        INPUT_WORKSPACE: ${{ inputs.workspace }}
+        INPUT_CONFIGFILE: ${{ inputs.configfile }}
+        INPUT_IGNORE_FAILED_SOURCES: ${{ inputs.ignore-failed-sources != 'false' && 'true' || 'false' }}
+        INPUT_FORCE: ${{ inputs.force != 'false' && 'true' || 'false' }}
+        INPUT_FORCE_EVALUATE: ${{ inputs.force-evaluate != 'false' && 'true' || 'false' }}
+        INPUT_USE_LOCK_FILE: ${{ inputs.use-lock-file != 'false' && 'true' || 'false' }}
+        INPUT_LOCK_FILE_PATH: ${{ inputs.lock-file-path != 'false' && 'true' || 'false' }}
+        INPUT_LOCKED_MODE: ${{ inputs.locked-mode != 'false' && 'true' || 'false' }}
+      run: |
+        "${{ github.action_path }}/entrypoint.sh"
